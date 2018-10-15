@@ -73,6 +73,7 @@ onError | Function | () => {} | Callback to be invoked on failed request. Fallba
 
 
 Props passed to children function:
+
 key | type | Value | Description
 ------ | ---- | ------- | ----------------------
 data | Object | | Response value.
