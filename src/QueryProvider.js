@@ -7,10 +7,6 @@
 import React from 'react';
 import { QueryProvider as QueryProviderContext } from './Context';
 
-function onError(e) {
-  console.log(e);
-}
-
 type State = {
   endpoints: Object<String>,
   defaultMethod: String,
@@ -50,4 +46,8 @@ export default class QueryProvider extends React.Component<Props, State> {
   render() {
     return <QueryProviderContext value={this.state}>{this.props.children}</QueryProviderContext>;
   }
+}
+
+function onError(e) {
+  console.log(e);
 }
