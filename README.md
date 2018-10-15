@@ -1,4 +1,4 @@
-# React Native Declarative Fetch
+# React Native Declarative Fetch [IN PROGRESS]
 
 Custom component to query server in declarative way.
 
@@ -10,7 +10,7 @@ Inspired by Apollo GraphQL library.
 
 ## Why?
 
-Setting fetch function on every call is tedious. Declarative code add readability factor.
+Setting fetch function on every call is tedious. Declarative code adds readability factor.
 
 ## Installation
 
@@ -71,7 +71,6 @@ onCompleted | Function | () => {} | Callback to be invoked on successful request
 onError | Function | () => {} | Callback to be invoked on failed request. Fallback to QueryProvider onError callback.
 };
 
-
 Props passed to children function:
 
 key | type | Value | Description
@@ -85,6 +84,7 @@ fetch | Function | | Conditionally fetch
 
 - Add tests
 - Refactor code
+- Fix grammar
 
 
 ## License

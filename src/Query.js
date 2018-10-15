@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { Text } from 'react-native';
 import { QueryConsumer } from './Context';
 
 type METHOD = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -28,7 +27,7 @@ type State = {
   loading: Boolean
 };
 
-class Query extends React.Component<Props, State> {
+export class Query extends React.Component<Props, State> {
   static defaultProps = {
     url: '',
     skip: false,
@@ -47,7 +46,7 @@ class Query extends React.Component<Props, State> {
 
   componentDidMount() {
     if (!this.props.url || !this.props.url.length) {
-      throw new Error('Url parameter is optional');
+      throw new Error('Url parameter is required.');
     }
     if (this.props.skip) {
       return;
@@ -114,6 +113,7 @@ class Query extends React.Component<Props, State> {
   };
 
   render() {
+    // TODO move fetch to state
     return this.props.children({ ...this.state, fetch: this.fetch });
   }
 }

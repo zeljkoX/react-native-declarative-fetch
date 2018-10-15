@@ -26,7 +26,7 @@ export default class QueryProvider extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     if (!props.endpoints || !props.endpoints.default) {
-      throw new Error('Endpoint mapping not defined.');
+      throw new Error('Endpoint mapping is not defined.');
     }
 
     this.state = {
