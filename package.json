@@ -1,0 +1,19 @@
+{
+  "name": "react-native-declarative-fetch",
+  "version": "0.0.1",
+  "description": "Declarative fetch interface.",
+  "main": "src/index.js",
+  "files": [
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeljkoX/react-native-declarative-fetch.git"
+  },
+  "author": "Zeljko Markovic <zaljko89markovic@gmail.com> (https://github.com/zeljkoX/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeljkoX/react-native-declarative-fetch/issues"
+  },
+  "homepage": "https://github.com/zeljkoX/react-native-declarative-fetch/readme",
+}
