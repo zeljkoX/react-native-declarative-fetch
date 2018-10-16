@@ -1,6 +1,6 @@
 # React Native Declarative Fetch [IN PROGRESS]
 
-Custom component to query server in declarative way.
+Client - Server communication in declarative way.
 
 
 ## Inspiration
@@ -27,7 +27,7 @@ export default class App extends Component {
     return (
       <QueryProvider
         defaultMethod='GET'
-        endpoints={{default: 'localhost:8081', v1: 'localhost:8082'}}
+        endpoints={{default: 'http://localhost:8081', v1: 'http://localhost:8082'}}
         defaultHeaders={{acceptLanguage: 'en'}}>
         <Query url='test'>{
           ({data, error, loading}) => {
@@ -48,11 +48,14 @@ export default class App extends Component {
 
 ## Props
 
-### Provider
+### QueryProvider
+
+QueryProvider takes default configuration which is used by every Query component nested inside QueryProvider.
+Should be add to app top level.
 
 key | type | Value | Description
 ------ | ---- | ------- | ----------------------
-endpoints | Object |  | Mapping of allowed endpoints.
+endpoints | Object |  | Mapping of used endpoints.
 defaultMethod | String | GET | Default Http method.
 defaultHeaders | Object | {} | Default Http headers.
 onError | Function | () => {} | Default error handler. Invoked on every Query error.
@@ -65,9 +68,8 @@ key | type | Value | Description
 method | String | GET | If not defined QueryProvider defaultMethod is used.
 headers: Object | {} | If not defined QueryProvider defaultHeaders is used.
 url | String |  | Required field, url that is added to QueryProvider endpoint.
-skip | Boolean | false | Skip fetch in React life cycle method.
-variables | Object | {} | Variables to be used with Post request.
-onCompleted | Function | () => {} | Callback to be invoked on successful request.
+skip | Boolean | false | Skip fetch in React componentDidMount lifecycle method.
+variables | Object | {} | Data to be used with Post request.
 onError | Function | () => {} | Callback to be invoked on failed request. Fallback to QueryProvider onError callback.
 };
 
@@ -85,7 +87,6 @@ fetch | Function | | Conditionally fetch
 - Add tests
 - Refactor code
 - Fix grammar
-
 
 ## License
 

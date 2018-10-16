@@ -16,7 +16,6 @@ type Props = {
   skip: Boolean,
   variables: Object<any>,
   headers: Object<any>,
-  onCompleted: Function,
   onError: Function,
   method: METHOD
 };
@@ -24,7 +23,8 @@ type Props = {
 type State = {
   data: ?any,
   error: Boolean,
-  loading: Boolean
+  loading: Boolean,
+  fetch: Function
 };
 
 export class Query extends React.Component<Props, State> {
@@ -34,14 +34,14 @@ export class Query extends React.Component<Props, State> {
     variables: {},
     headers: {},
     method: 'GET',
-    onCompleted: () => {},
     onError: () => {}
   };
 
   state = {
     data: null,
     error: false,
-    loading: false
+    loading: false,
+    fetch: () => this.fetch()
   };
 
   componentDidMount() {
@@ -52,6 +52,10 @@ export class Query extends React.Component<Props, State> {
       return;
     }
     return this.fetch();
+  }
+
+  componentDidCatch(error, info) {
+    this.onError(error);
   }
 
   getMethod = (): METHOD => {
@@ -89,7 +93,7 @@ export class Query extends React.Component<Props, State> {
       let response = await fetch(this.getUrl(), this.getFetchParameters());
       if (response.ok) {
         let result = await response.json();
-        return this.onCompleted(result);
+        return this.onSuccess(result);
       }
     } catch (e) {
       return this.onError(e);
@@ -104,7 +108,7 @@ export class Query extends React.Component<Props, State> {
     this.props.onError && this.props.onError(e);
   };
 
-  onCompleted = (data: Object<any>) => {
+  onSuccess = (data: Object<any>) => {
     this.setState(() => ({
       loading: false,
       error: false,
@@ -112,9 +116,8 @@ export class Query extends React.Component<Props, State> {
     }));
   };
 
-  render() {
-    // TODO move fetch to state
-    return this.props.children({ ...this.state, fetch: this.fetch });
+  render(): React.Node {
+    return this.props.children(this.state);
   }
 }
 

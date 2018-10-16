@@ -1,5 +1,5 @@
 /**
- * Provider
+ * QueryProvider
  *
  * @flow
  */
@@ -21,7 +21,7 @@ type Props = {
   defaultHeaders: ?Object<String>,
   onError: Function
 };
-
+//(endpoint: ?String) => this.getEndpoint(endpoint)
 export default class QueryProvider extends React.Component<Props, State> {
   constructor(props) {
     super(props);
@@ -33,21 +33,23 @@ export default class QueryProvider extends React.Component<Props, State> {
       endpoints: this.props.endpoints,
       defaultMethod: props.defaultMethod || 'GET',
       defaultHeaders: props.defaultHeaders || {},
-      onError: props.onError || onError,
-      getEndpoint: (endpoint: ?String): String => {
-        if (!endpoint || !this.state.endpoints[endpoint]) {
-          return this.state.endpoints['default'];
-        }
-        return this.state.endpoints[endpoint];
-      }
+      onError: e => this.onError(e),
+      getEndpoint: (endpoint: ?String): String => this.getEndpoint(endpoint)
     };
   }
+
+  getEndpoint = (endpoint: ?String): String => {
+    if (!endpoint || !this.state.endpoints[endpoint]) {
+      return this.state.endpoints['default'];
+    }
+    return this.state.endpoints[endpoint];
+  };
+
+  onError = e => {
+    this.props.onError && this.props.onError(e);
+  };
 
   render() {
     return <QueryProviderContext value={this.state}>{this.props.children}</QueryProviderContext>;
   }
-}
-
-function onError(e) {
-  console.log(e);
 }
