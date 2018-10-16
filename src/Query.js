@@ -45,6 +45,9 @@ export class Query extends React.Component<Props, State> {
   };
 
   componentDidMount() {
+    if (!this.props.getEndpoint || !this.props.defaultHeaders || !this.props.defaultMethod) {
+      throw new Error('QueryProvider component should be used in conjunction with Query component.');
+    }
     if (!this.props.url || !this.props.url.length) {
       throw new Error('Url parameter is required.');
     }
@@ -70,7 +73,7 @@ export class Query extends React.Component<Props, State> {
   };
 
   getUrl = (): String => {
-    return `${this.props.getEndpoint(this.props.endpoint)}${this.props.url}`;
+    return `${this.props.getEndpoint(this.props.endpoint)}${this.props.url[0] !== '/' ? '/' : ''}${this.props.url}`;
   };
 
   getFetchParameters = (): Object => {
@@ -121,4 +124,4 @@ export class Query extends React.Component<Props, State> {
   }
 }
 
-export default props => <QueryConsumer>{queryProps => <Query {...queryProps} {...props} />}</QueryConsumer>;
+export default props => <QueryConsumer>{queryProps => <Query {...props} {...queryProps} />}</QueryConsumer>;

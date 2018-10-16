@@ -21,7 +21,6 @@ type Props = {
   defaultHeaders: ?Object<String>,
   onError: Function
 };
-//(endpoint: ?String) => this.getEndpoint(endpoint)
 export default class QueryProvider extends React.Component<Props, State> {
   constructor(props) {
     super(props);
@@ -38,11 +37,18 @@ export default class QueryProvider extends React.Component<Props, State> {
     };
   }
 
+  removeSlashAtTheEnd(string: String): String {
+    if (string[string.length - 1] === '/') {
+      return string.slice(0, -1);
+    }
+    return string;
+  }
+
   getEndpoint = (endpoint: ?String): String => {
     if (!endpoint || !this.state.endpoints[endpoint]) {
-      return this.state.endpoints['default'];
+      return this.removeSlashAtTheEnd(this.state.endpoints['default']);
     }
-    return this.state.endpoints[endpoint];
+    return this.removeSlashAtTheEnd(this.state.endpoints[endpoint]);
   };
 
   onError = e => {

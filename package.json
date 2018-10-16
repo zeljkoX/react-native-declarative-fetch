@@ -14,23 +14,21 @@
     "type": "git",
     "url": "git+https://github.com/zeljkoX/react-native-declarative-fetch.git"
   },
-  "author": "Zeljko Markovic <zaljko89markovic@gmail.com> (https://github.com/zeljkoX/)",
+  "author": "Zeljko Markovic <zeljko89markovic@gmail.com> (https://github.com/zeljkoX/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zeljkoX/react-native-declarative-fetch/issues"
   },
   "devDependencies": {
+    "@babel/core": "7.1.2",
     "babel-jest": "23.4.2",
-    "babel-preset-react-native": "5",
+    "babel-preset-react-native": "4.0.0",
     "jest": "23.5.0",
     "prettier": "1.14.2",
+    "react": "*",
+    "react-native": "*",
+    "react-native-testing-library": "1.0.0",
     "react-test-renderer": "16.4.1"
-  },
-  "jest": {
-    "preset": "react-native",
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-    }
   },
   "prettier": {
     "jsxBracketSameLine": true,
@@ -38,5 +36,11 @@
     "singleQuote": true,
     "tabWidth": 2,
     "printWidth": 120
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "fetch-mock": "^7.0.7"
   }
 }
