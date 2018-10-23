@@ -19,7 +19,7 @@ Setting fetch function on every call is tedious. Declarative code adds readabili
 ## Quick Start
 ```javascript
 
-import {Provider, Query} from 'react-native-declarative-fetch'
+import {QueryProvider, Query} from 'react-native-declarative-fetch'
 
 export default class App extends Component {
 
